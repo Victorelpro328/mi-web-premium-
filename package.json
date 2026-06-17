@@ -4,8 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "echo 'Generando sitio estático...' && cp index.html dist/index.html 2>/dev/null || true",
-    "dev": "echo 'Modo desarrollo'"
+    "build": "echo 'Listo'"
   },
   "dependencies": {
     "framer-motion": "^11.0.0",
