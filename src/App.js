@@ -1,18 +1,15 @@
-// --- PORTAFOLIO PREMIUM - VICTOR HUGO ---
 const WHATSAPP_URL = "https://wa.me/595984190223?text=Hola!%20Me%20gustaría%20iniciar%20un%20proyecto%20de%20alto%20nivel%20contigo.";
 
 function App() {
   return `
     <div class="bg-[#020204] min-h-screen text-white relative overflow-x-hidden font-sans antialiased selection:bg-cyan-500/30">
       
-      {/* CAPA VISUAL DE FONDO */}
       <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.02] via-transparent to-cyan-500/[0.02] blur-3xl"></div>
         <div class="absolute left-[-10%] top-[12%] w-[450px] h-[110px] bg-gradient-to-r from-indigo-500/[0.07] to-transparent rounded-full border border-white/[0.05] blur-[1px] rotate-[10deg] animate-pulse"></div>
         <div class="absolute right-[-10%] top-[60%] w-[380px] h-[90px] bg-gradient-to-r from-cyan-500/[0.07] to-transparent rounded-full border border-white/[0.05] blur-[1px] rotate-[-12deg]"></div>
       </div>
 
-      {/* MENÚ FLOTANTE */}
       <header class="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-xl">
         <nav class="bg-[#040408]/80 backdrop-blur-xl border border-white/[0.06] py-3 px-6 rounded-full flex items-center justify-between shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
           <span class="text-xs font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-white to-neutral-400">
@@ -26,7 +23,6 @@ function App() {
         </nav>
       </header>
 
-      {/* SECCIÓN HERO */}
       <section class="min-h-screen flex flex-col justify-center items-center px-6 pt-24 relative z-10 text-center">
         <div class="space-y-6 max-w-3xl mx-auto">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
@@ -51,7 +47,6 @@ function App() {
         </div>
       </section>
 
-      {/* SECCIÓN TRABAJOS */}
       <section class="px-6 py-24 max-w-5xl mx-auto relative z-10">
         <div class="text-center space-y-2 mb-12">
           <h2 class="text-[11px] uppercase tracking-widest text-cyan-400 font-bold">Estructura Avanzada</h2>
@@ -83,7 +78,6 @@ function App() {
         </div>
       </section>
 
-      {/* SECCIÓN INTERACTIVA: PANTALLAS 3D */}
       <section class="py-20 px-6 max-w-4xl mx-auto text-center relative z-10 overflow-visible">
         <div class="space-y-3 mb-16">
           <span class="text-[10px] font-mono text-indigo-400 px-3 py-1 bg-indigo-400/10 border border-indigo-500/20 rounded-full uppercase tracking-widest">
@@ -95,7 +89,6 @@ function App() {
           </p>
         </div>
         
-        {/* GALERÍA EN PERSPECTIVA 3D */}
         <div class="flex flex-col gap-6 items-center justify-center py-4 overflow-visible w-full relative">
           <div class="relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-white/10 bg-[#070a13]/90 backdrop-blur-md px-5 py-4 transition-all duration-500 hover:-translate-y-3 hover:border-cyan-500/50 shadow-xl z-30">
             <div class="flex items-center gap-3">
@@ -115,7 +108,6 @@ function App() {
         </div>
       </section>
 
-      {/* SECCIÓN SOBRE MÍ */}
       <section class="bg-[#010103] border-t border-white/[0.05] py-24 px-6 relative z-10">
         <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           <div class="md:col-span-2 space-y-4 text-neutral-300 text-sm font-light leading-relaxed text-justify">
@@ -135,7 +127,6 @@ function App() {
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer class="bg-[#010103] border-t border-white/[0.05] py-8 text-center text-[10px] text-neutral-500 font-mono tracking-widest uppercase relative z-10">
         © 2026 Victor Hugo. Todos los derechos reservados.
       </footer>
@@ -144,5 +135,4 @@ function App() {
   `;
 }
 
-// Inyectar el diseño directamente en la web
 document.getElementById('root').innerHTML = App();
