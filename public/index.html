@@ -9,7 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+    .window-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
   </style>
 </head>
 <body class="bg-[#020204] text-white antialiased">
@@ -23,22 +24,22 @@
       <div class="absolute right-[-10%] top-[60%] w-[380px] h-[90px] bg-gradient-to-r from-cyan-500/[0.07] to-transparent rounded-full border border-white/[0.05] blur-[1px] rotate-[-12deg]"></div>
     </div>
 
-    <!-- MENÚ FLOTANTE -->
+    <!-- MENÚ FLOTANTE (YA CON ENLACES FUNCIONALES) -->
     <header class="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-xl">
       <nav class="bg-[#040408]/80 backdrop-blur-xl border border-white/[0.06] py-3 px-6 rounded-full flex items-center justify-between shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
         <span class="text-xs font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-white to-neutral-400">
           V.H.
         </span>
         <div class="flex gap-4 text-[10px] uppercase tracking-widest font-semibold text-neutral-400">
-          <span class="text-white">Inicio</span>
-          <span>Proyectos</span>
-          <span>Explorar</span>
+          <a href="#inicio" class="hover:text-white transition-colors">Inicio</a>
+          <a href="#proyectos" class="hover:text-white transition-colors">Proyectos</a>
+          <a href="#explorar" class="hover:text-white transition-colors">Explorar</a>
         </div>
       </nav>
     </header>
 
     <!-- SECCIÓN HERO -->
-    <section class="min-h-screen flex flex-col justify-center items-center px-6 pt-24 relative z-10 text-center">
+    <section id="inicio" class="min-h-screen flex flex-col justify-center items-center px-6 pt-24 relative z-10 text-center">
       <div class="space-y-6 max-w-3xl mx-auto">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
           <span class="h-1.5 w-1.5 rounded-full bg-cyan-400 block"></span>
@@ -63,7 +64,7 @@
     </section>
 
     <!-- SECCIÓN TRABAJOS -->
-    <section class="px-6 py-24 max-w-5xl mx-auto relative z-10">
+    <section id="proyectos" class="px-6 py-24 max-w-5xl mx-auto relative z-10">
       <div class="text-center space-y-2 mb-12">
         <h2 class="text-[11px] uppercase tracking-widest text-cyan-400 font-bold">Estructura Avanzada</h2>
         <p class="text-2xl sm:text-3xl font-bold tracking-tight">Desarrollos a Medida</p>
@@ -94,44 +95,64 @@
       </div>
     </section>
 
-    <!-- SECCIÓN INTERACTIVA: PANTALLAS 3D -->
-    <section class="py-20 px-6 max-w-4xl mx-auto text-center relative z-10 overflow-visible">
-      <div class="space-y-3 mb-16">
+    <!-- SECCIÓN INTERACTIVA: CARRUSEL DE 3 VENTANAS CON FLECHAS -->
+    <section id="explorar" class="py-20 px-6 max-w-4xl mx-auto text-center relative z-10 overflow-visible">
+      <div class="space-y-3 mb-10">
         <span class="text-[10px] font-mono text-indigo-400 px-3 py-1 bg-indigo-400/10 border border-indigo-500/20 rounded-full uppercase tracking-widest">
           Comportamiento Tridimensional
         </span>
         <h3 class="text-2xl sm:text-4xl font-bold tracking-tight">Perspectiva Dinámica</h3>
         <p class="text-neutral-400 text-xs sm:text-sm max-w-md mx-auto font-light leading-relaxed">
-          Las capas responden visualmente imitando depth real, logrando un entorno digital interactivo y moderno.
+          Explorá mis enfoques clave usando las flechas de control.
         </p>
       </div>
       
-      <div class="flex flex-col gap-6 items-center justify-center py-4 overflow-visible w-full relative">
-        <div class="relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-white/10 bg-[#070a13]/90 backdrop-blur-md px-5 py-4 transition-all duration-500 hover:-translate-y-3 hover:border-cyan-500/50 shadow-xl z-30">
-          <div class="flex items-center gap-3">
-            <p class="text-lg font-semibold text-white tracking-tight">✨ Tiendas Virtuales</p>
+      <!-- CONTENEDOR DEL INTERACTIVO -->
+      <div class="relative flex flex-col items-center justify-center min-h-[220px] w-full overflow-visible max-w-sm mx-auto">
+        
+        <!-- VENTANA 1 -->
+        <div id="win-0" class="window-card absolute inset-0 flex h-40 flex-col justify-between rounded-xl border border-white/10 bg-[#070a13]/90 backdrop-blur-md px-6 py-5 shadow-2xl z-30 opacity-100 scale-100 -skew-y-[4deg]">
+          <div class="text-left">
+            <p class="text-lg font-bold text-white tracking-tight">✨ Tiendas Virtuales</p>
+            <p class="text-sm text-neutral-300 font-light mt-1">E-commerce de alto rendimiento configurado para escalar ventas globalmente.</p>
           </div>
-          <p class="text-sm text-neutral-300 font-light text-left">E-commerce optimizado y rápido.</p>
-          <p class="text-[10px] text-neutral-500 font-mono tracking-wider uppercase text-left">Estructura Premium</p>
+          <p class="text-[9px] text-cyan-400 font-mono tracking-wider uppercase text-left">Estructura Avanzada</p>
         </div>
 
-        <div class="relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-white/10 bg-[#070a13]/70 backdrop-blur-md px-5 py-4 transition-all duration-500 hover:-translate-y-3 hover:border-cyan-500/50 shadow-xl z-20 sm:translate-x-12 opacity-90">
-          <div class="flex items-center gap-3">
-            <p class="text-lg font-semibold text-white tracking-tight">✨ Interfaces Fluidas</p>
+        <!-- VENTANA 2 -->
+        <div id="win-1" class="window-card absolute inset-0 flex h-40 flex-col justify-between rounded-xl border border-white/5 bg-[#05070d]/60 backdrop-blur-md px-6 py-5 shadow-xl z-20 opacity-0 scale-90 pointer-events-none">
+          <div class="text-left">
+            <p class="text-lg font-bold text-white tracking-tight">🎨 Diseño Identitario</p>
+            <p class="text-sm text-neutral-300 font-light mt-1">Logos y conceptos visuales imponentes que marcan la diferencia competitiva en el mercado.</p>
           </div>
-          <p class="text-sm text-neutral-300 font-light text-left">Diseños limpios que retienen visitas.</p>
-          <p class="text-[10px] text-neutral-500 font-mono tracking-wider uppercase text-left">Alta Estética</p>
+          <p class="text-[9px] text-indigo-400 font-mono tracking-wider uppercase text-left">Línea Estética</p>
         </div>
+
+        <!-- VENTANA 3 -->
+        <div id="win-2" class="window-card absolute inset-0 flex h-40 flex-col justify-between rounded-xl border border-white/5 bg-[#05070d]/60 backdrop-blur-md px-6 py-5 shadow-xl z-10 opacity-0 scale-90 pointer-events-none">
+          <div class="text-left">
+            <p class="text-lg font-bold text-white tracking-tight">⚡ Optimización Extrema</p>
+            <p class="text-sm text-neutral-300 font-light mt-1">Código pulido sin sobrecargas para lograr una velocidad de carga instantánea.</p>
+          </div>
+          <p class="text-[9px] text-emerald-400 font-mono tracking-wider uppercase text-left">Rendimiento Puro</p>
+        </div>
+
+      </div>
+
+      <!-- BOTONES DE CONTROL DE LAS VENTANAS -->
+      <div class="flex justify-center gap-6 mt-8">
+        <button onclick="changeWindow(-1)" class="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-lg font-bold hover:bg-white/10 active:scale-90 transition-all select-none cursor-pointer">←</button>
+        <button onclick="changeWindow(1)" class="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-lg font-bold hover:bg-white/10 active:scale-90 transition-all select-none cursor-pointer">→</button>
       </div>
     </section>
 
-    <!-- SECCIÓN SOBRE MÍ -->
+    <!-- SECCIÓN SOBRE MÍ (CON TU NUEVA DESCRIPCIÓN) -->
     <section class="bg-[#010103] border-t border-white/[0.05] py-24 px-6 relative z-10">
       <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="md:col-span-2 space-y-4 text-neutral-300 text-sm font-light leading-relaxed text-justify">
-          <h3 class="text-2xl font-bold text-white tracking-tight mb-2">Filosofía de Trabajo</h3>
-          <p>Evito los empaquetados pesados y las plantillas genéricas saturadas que destruyen los tiempos de carga. En el ecosistema digital actual, la agilidad técnica y la limpieza visual marcan la diferencia competitiva.</p>
-          <p>Me dedico a construir interfaces fluidas y arquitecturas estables, asegurando que cada componente aporte valor real a la experiencia de navegación del usuario final.</p>
+          <h3 class="text-2xl font-bold text-white tracking-tight mb-2">Supongo que te agradó esta página</h3>
+          <p class="text-base font-medium text-white">Soy capaz de mucho más. Tengo 16 años y mi trabajo será darte una página impecable.</p>
+          <p>La edad es solo un número cuando hay disciplina y pasión por el desarrollo de alto nivel. Me dedico a romper el molde de los sitios web genéricos y aburridos, combinando lógica sólida y un sentido del diseño afilado para crear experiencias digitales que funcionen como imanes de conversión.</p>
         </div>
         <div class="bg-[#04060a] border border-white/[0.06] p-6 rounded-xl flex flex-col justify-between shadow-xl">
           <div class="space-y-2">
@@ -151,6 +172,42 @@
     </footer>
 
   </div>
+
+  <!-- SCRIPT DE CONTROL INTERACTIVO PARA LAS VENTANAS -->
+  <script>
+    let currentWin = 0;
+    const totalWins = 3;
+
+    function changeWindow(dir) {
+      currentWin = (currentWin + dir + totalWins) % totalWins;
+      
+      for (let i = 0; i < totalWins; i++) {
+        const win = document.getElementById('win-' + i);
+        if (i === currentWin) {
+          // Ventana Activa (Enfrente de todo)
+          win.style.opacity = "1";
+          win.style.transform = "scale(1) skewY(-4deg) translateY(0px)";
+          win.style.zIndex = "30";
+          win.style.pointerEvents = "auto";
+        } else if (i === (currentWin + 1) % totalWins) {
+          // Ventana de Fondo (Efecto Capa 3D hacia la derecha/atrás)
+          win.style.opacity = "0.5";
+          win.style.transform = "scale(0.9) skewY(-4deg) translateX(25px) translateY(15px)";
+          win.style.zIndex = "20";
+          win.style.pointerEvents = "none";
+        } else {
+          // Ventana Oculta preparada
+          win.style.opacity = "0";
+          win.style.transform = "scale(0.8) skewY(-4deg) translateX(-25px) translateY(-15px)";
+          win.style.zIndex = "10";
+          win.style.pointerEvents = "none";
+        }
+      }
+    }
+    
+    // Iniciar la visualización inicial de las capas
+    changeWindow(0);
+  </script>
 
 </body>
 </html>
