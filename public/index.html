@@ -13,11 +13,17 @@
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
     .window-card { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-    .glass-morphic {
-      background: rgba(4, 6, 10, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(16px);
+    
+    /* Animación de flote suave para el inicio */
+    @keyframes floatAnimation {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
     }
+    .floating-hero {
+      animation: floatAnimation 5s ease-in-out infinite;
+    }
+
     .glass-input {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -54,9 +60,9 @@
       </nav>
     </header>
 
-    <!-- 1. SECCIÓN HERO -->
+    <!-- 1. SECCIÓN HERO (CON EL FLOTE SOLITO) -->
     <section id="inicio" class="min-h-screen flex flex-col justify-center items-center px-6 pt-24 relative z-10 text-center">
-      <div class="space-y-6 max-w-3xl mx-auto">
+      <div class="space-y-6 max-w-3xl mx-auto floating-hero">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
           <span class="h-1.5 w-1.5 rounded-full bg-cyan-400 block"></span>
           <span class="text-[10px] font-medium text-neutral-400 tracking-widest uppercase">Diseño Web Exclusivo & E-Commerce</span>
@@ -79,7 +85,7 @@
       </div>
     </section>
 
-    <!-- 2. SECCIÓN TRABAJOS -->
+    <!-- 2. SECCIÓN TRABAJOS (CON LAS TARJETAS INTERACTIVAS Y SIN EMOJIS) -->
     <section id="proyectos" class="px-6 py-24 max-w-5xl mx-auto relative z-10">
       <div class="text-center space-y-2 mb-12">
         <h2 class="text-[11px] uppercase tracking-widest text-cyan-400 font-bold">Estructura Avanzada</h2>
@@ -110,19 +116,20 @@
         </div>
       </div>
 
+      <!-- Bloques de Tarjetas Ahora Totalmente Interactivos al Hacer Clic -->
       <div class="flex flex-col gap-6 items-center justify-center py-16 overflow-visible w-full relative">
-        <div class="relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-white/10 bg-[#070a13]/90 backdrop-blur-md px-5 py-4 shadow-xl z-20">
+        <div id="card-tiendas" onclick="toggleFeatureCard('tiendas')" class="relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-cyan-500/40 bg-[#070a13]/95 backdrop-blur-md px-5 py-4 shadow-xl z-20 cursor-pointer transition-all duration-300">
           <div class="flex items-center gap-3">
-            <p class="text-lg font-semibold text-white tracking-tight">✨ Tiendas Virtuales</p>
+            <p class="text-lg font-semibold text-white tracking-tight">Tiendas Virtuales</p>
           </div>
           <p class="text-sm text-neutral-300 font-light text-left">E-commerce optimizado y rápido.</p>
-          <p class="text-[10px] text-neutral-500 font-mono tracking-wider uppercase text-left">Estructura Premium</p>
+          <p class="text-[10px] text-cyan-400 font-mono tracking-wider uppercase text-left">Estructura Premium</p>
         </div>
-        <div class="relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-white/10 bg-[#070a13]/70 backdrop-blur-md px-5 py-4 shadow-xl z-10 sm:translate-x-12 opacity-90">
+        <div id="card-interfaces" onclick="toggleFeatureCard('interfaces')" class="relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-white/10 bg-[#070a13]/50 backdrop-blur-md px-5 py-4 shadow-xl z-10 sm:translate-x-12 opacity-80 cursor-pointer transition-all duration-300">
           <div class="flex items-center gap-3">
-            <p class="text-lg font-semibold text-white tracking-tight">✨ Interfaces Fluidas</p>
+            <p class="text-lg font-semibold text-neutral-400 tracking-tight">Interfaces Fluidas</p>
           </div>
-          <p class="text-sm text-neutral-300 font-light text-left">Diseños limpios que retienen visitas.</p>
+          <p class="text-sm text-neutral-400 font-light text-left">Diseños limpios que retienen visitas.</p>
           <p class="text-[10px] text-neutral-500 font-mono tracking-wider uppercase text-left">Alta Estética</p>
         </div>
       </div>
@@ -141,9 +148,9 @@
       </div>
       
       <!-- CONTENEDOR CENTRAL PLANO Y FUNCIONAL -->
-      <div class="relative w-full min-h-[460px] sm:min-h-[440px] max-w-md mx-auto flex items-center justify-center overflow-visible">
+      <div class="relative w-full min-h-[440px] sm:min-h-[420px] max-w-md mx-auto flex items-center justify-center overflow-visible">
         
-        <!-- VENTANA 1: COMPONENTE INICIAR SESIÓN (ESPAÑOL) -->
+        <!-- VENTANA 1: COMPONENTE INICIAR SESIÓN -->
         <div id="win-0" class="window-card absolute inset-0 w-full h-full rounded-2xl border border-white/10 bg-[#05070f]/95 backdrop-blur-xl p-6 shadow-2xl flex flex-col justify-between text-left opacity-100 scale-100 z-30 pointer-events-auto">
           <div class="space-y-4">
             <div class="flex items-center justify-between">
@@ -178,9 +185,6 @@
               <svg class="h-4 w-4" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s12-5.373 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-2.641-.21-5.236-.611-7.743z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571l6.19 5.238C42.022 35.026 44 30.038 44 24c0-2.641-.21-5.236-.611-7.743z"/></svg>
               Cuenta de Google
             </button>
-          </div>
-          <div class="border-t border-white/5 pt-3 mt-2 text-[9px] font-mono text-neutral-500 tracking-wider uppercase">
-            // Interfaz de formulario real
           </div>
         </div>
 
@@ -232,10 +236,6 @@
               </p>
             </div>
           </div>
-
-          <div class="border-t border-white/5 pt-3 text-[9px] font-mono text-neutral-500 tracking-wider uppercase">
-            // Tocá para cambiar de etapa
-          </div>
         </div>
 
         <!-- VENTANA 3: ESPERANDO PRÓXIMO CONTENIDO -->
@@ -253,7 +253,7 @@
       </div>
     </section>
 
-    <!-- 4. SECCIÓN SOBRE MÍ (FILOSOFÍA DE TRABAJO CORREGIDA COMO VOS HABLAS) -->
+    <!-- 4. SECCIÓN SOBRE MÍ (CON TU MENSAJE EXACTO) -->
     <section class="bg-[#010103] border-t border-white/[0.05] py-24 px-6 relative z-10">
       <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="md:col-span-2 space-y-4 text-neutral-300 text-sm font-light leading-relaxed text-justify">
@@ -262,10 +262,10 @@
           <p>Me enfoco en armar páginas que se muevan suave, que sean sencillas de entender y donde cada botón funcione a la perfección para que el usuario tenga la mejor experiencia posible.</p>
         </div>
         
-        <!-- COMPONENTE NEGRO CON TU MENSAJE EXACTO -->
+        <!-- COMPONENTE NEGRO CON TU MENSAJE Y EL NUEVO TÍTULO "¿Quién soy?" -->
         <div class="bg-[#04060a] border border-white/[0.06] p-6 rounded-xl flex flex-col justify-between shadow-xl">
           <div class="space-y-3">
-            <div class="text-[10px] font-mono text-cyan-400 tracking-wider">// DISEÑO Y CÓDIGO</div>
+            <h4 class="text-lg font-bold text-white tracking-tight">¿Quién soy?</h4>
             <p class="text-sm font-bold text-white leading-snug">Supongo que te agrado esta página soy capaz de más tengo 16 años mi trabajo sera darte una pagina impecable</p>
             <p class="text-xs text-neutral-400 font-light leading-relaxed">Fusionando código optimizado, diseño de vanguardia y velocidad extrema para crear interfaces que marcan tendencia.</p>
           </div>
@@ -352,6 +352,26 @@
         nDesign.querySelector('span').innerText = "Espera";
 
         desc.innerHTML = "<strong class='text-white'>Programación Web:</strong> Pasamos el diseño a código limpio que funciona rápido, se adapta a pantallas móviles y no traba el navegador.";
+      }
+    }
+
+    // Alternar foco visual de las tarjetas estáticas
+    function toggleFeatureCard(activeCard) {
+      const tiendas = document.getElementById('card-tiendas');
+      const interfaces = document.getElementById('card-interfaces');
+      
+      if(activeCard === 'tiendas') {
+        tiendas.className = "relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-cyan-500/40 bg-[#070a13]/95 backdrop-blur-md px-5 py-4 shadow-xl z-20 cursor-pointer transition-all duration-300";
+        tiendas.querySelector('p').className = "text-lg font-semibold text-white tracking-tight";
+        
+        interfaces.className = "relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-white/10 bg-[#070a13]/50 backdrop-blur-md px-5 py-4 shadow-xl z-10 sm:translate-x-12 opacity-80 cursor-pointer transition-all duration-300";
+        interfaces.querySelector('p').className = "text-lg font-semibold text-neutral-400 tracking-tight";
+      } else {
+        interfaces.className = "relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-cyan-500/40 bg-[#070a13]/95 backdrop-blur-md px-5 py-4 shadow-xl z-20 sm:translate-x-12 cursor-pointer transition-all duration-300";
+        interfaces.querySelector('p').className = "text-lg font-semibold text-white tracking-tight";
+        
+        tiendas.className = "relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-white/10 bg-[#070a13]/50 backdrop-blur-md px-5 py-4 shadow-xl z-10 opacity-80 cursor-pointer transition-all duration-300";
+        tiendas.querySelector('p').className = "text-lg font-semibold text-neutral-400 tracking-tight";
       }
     }
 
