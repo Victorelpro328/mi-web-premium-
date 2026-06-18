@@ -7,10 +7,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons para emular Eye/EyeOff del componente original -->
+  <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
     .window-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+    /* Estilos personalizados para emular el Glassmorphism del SignIn Component */
+    .glass-input {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(4px);
+      transition: all 0.3s ease;
+    }
+    .glass-input:focus-within {
+      border-color: rgba(167, 139, 250, 0.7);
+      background: rgba(139, 92, 246, 0.1);
+    }
   </style>
 </head>
 <body class="bg-[#020204] text-white antialiased">
@@ -94,7 +107,6 @@
         </div>
       </div>
 
-      <!-- El bloque de Perspectiva Dinámica original se mantiene acá abajo estable -->
       <div class="flex flex-col gap-6 items-center justify-center py-16 overflow-visible w-full relative">
         <div class="relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-white/10 bg-[#070a13]/90 backdrop-blur-md px-5 py-4 shadow-xl z-20">
           <div class="flex items-center gap-3">
@@ -113,7 +125,7 @@
       </div>
     </section>
 
-    <!-- 3. APARTADO NUEVO E INTERACTIVO (PENÚLTIMO ELEMENTO) -->
+    <!-- 3. APARTADO INTERACTIVO DE COMPONENTES DE CÓDIGO (PENÚLTIMO ELEMENTO) -->
     <section id="interactivo" class="py-20 px-6 max-w-4xl mx-auto text-center relative z-10 overflow-visible">
       <div class="space-y-3 mb-10">
         <span class="text-[10px] font-mono text-cyan-400 px-3 py-1 bg-cyan-400/10 border border-cyan-500/20 rounded-full uppercase tracking-widest">
@@ -121,38 +133,74 @@
         </span>
         <h3 class="text-2xl sm:text-4xl font-bold tracking-tight">Laboratorio de Desarrollo</h3>
         <p class="text-neutral-400 text-xs sm:text-sm max-w-md mx-auto font-light leading-relaxed">
-          Navegá por las ventanas de código avanzado usando los controles laterales.
+          Navegá por los módulos avanzados extraídos directo de mi repositorio utilizando las flechas.
         </p>
       </div>
       
-      <!-- CONTENEDOR CENTRAL: Acá adentro inyectaré los 3 códigos de 21st.dev cuando me los pases -->
-      <div class="relative flex flex-col items-center justify-center min-h-[260px] w-full overflow-visible max-w-md mx-auto">
+      <!-- CONTENEDOR CENTRAL DE INTERACTIVIDAD -->
+      <div class="relative flex flex-col items-center justify-center min-h-[420px] w-full overflow-visible max-w-sm mx-auto">
         
-        <!-- VENTANA 1 -->
-        <div id="win-0" class="window-card absolute inset-0 flex flex-col justify-center items-center rounded-xl border border-white/10 bg-[#070a13]/95 backdrop-blur-md p-6 shadow-2xl z-30 opacity-100 scale-100 -skew-y-[4deg]">
-          <p class="text-neutral-400 text-sm font-mono">[ Pegaré aquí el Código 1 de 21st.dev ]</p>
+        <!-- VENTANA 1: COMPONENTE SIGN-IN RECONSTRUIDO EN COMPACTO -->
+        <div id="win-0" class="window-card absolute inset-0 flex flex-col justify-between rounded-2xl border border-white/10 bg-[#060813]/95 backdrop-blur-xl p-5 shadow-2xl z-30 opacity-100 scale-100 -skew-y-[4deg]">
+          <div class="text-left w-full space-y-3">
+            <div class="flex items-center justify-between">
+              <h4 class="text-base font-semibold tracking-tight text-white">Welcome Back</h4>
+              <span class="text-[8px] font-mono px-2 py-0.5 rounded bg-violet-500/10 text-violet-400 border border-violet-500/20 uppercase">Sign In Screen</span>
+            </div>
+            
+            <!-- Inputs emulados con el Glassmorphism original -->
+            <div class="space-y-2">
+              <div class="glass-input rounded-xl p-2.5 flex flex-col">
+                <span class="text-[9px] text-neutral-400 font-medium">Email Address</span>
+                <input type="text" disabled placeholder="usuario@correo.com" class="bg-transparent text-xs text-neutral-300 outline-none pt-0.5 cursor-not-allowed" />
+              </div>
+              <div class="glass-input rounded-xl p-2.5 flex flex-col relative">
+                <span class="text-[9px] text-neutral-400 font-medium">Password</span>
+                <input type="password" disabled value="••••••••••••" class="bg-transparent text-xs text-neutral-300 outline-none pt-0.5 cursor-not-allowed" />
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-neutral-500 absolute right-3 bottom-3"></i>
+              </div>
+            </div>
+
+            <!-- Botones -->
+            <button class="w-full bg-violet-600 hover:bg-violet-700 text-white text-[11px] font-semibold py-2.5 rounded-xl transition-colors cursor-not-allowed">
+              Sign In
+            </button>
+            
+            <div class="relative flex items-center justify-center my-1">
+              <span class="w-full border-t border-white/5"></span>
+              <span class="px-2 text-[9px] text-neutral-500 bg-[#060813] absolute">Or continue with</span>
+            </div>
+
+            <button class="w-full flex items-center justify-center gap-2 border border-white/10 rounded-xl py-2 text-[10px] text-neutral-300 bg-white/5 cursor-not-allowed">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s12-5.373 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-2.641-.21-5.236-.611-7.743z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571l6.19 5.238C42.022 35.026 44 30.038 44 24c0-2.641-.21-5.236-.611-7.743z"/></svg>
+              Google Account
+            </button>
+          </div>
+          <p class="text-[9px] text-neutral-500 font-mono tracking-wider uppercase text-left w-full border-t border-white/5 pt-2">React Component Compiled</p>
         </div>
 
-        <!-- VENTANA 2 -->
-        <div id="win-1" class="window-card absolute inset-0 flex flex-col justify-center items-center rounded-xl border border-white/5 bg-[#05070d]/95 backdrop-blur-md p-6 shadow-xl z-20 opacity-0 scale-90 pointer-events-none">
-          <p class="text-neutral-400 text-sm font-mono">[ Pegaré aquí el Código 2 de 21st.dev ]</p>
+        <!-- VENTANA 2: ESPERANDO TU PRÓXIMO CÓDIGO -->
+        <div id="win-1" class="window-card absolute inset-0 flex flex-col justify-center items-center rounded-2xl border border-white/5 bg-[#05070d]/95 backdrop-blur-md p-6 shadow-xl z-20 opacity-0 scale-90 pointer-events-none">
+          <i data-lucide="code-2" class="w-8 h-8 text-indigo-400 mb-2"></i>
+          <p class="text-neutral-400 text-xs font-mono">[ Pasame el Código 2 de 21st.dev ]</p>
         </div>
 
-        <!-- VENTANA 3 -->
-        <div id="win-2" class="window-card absolute inset-0 flex flex-col justify-center items-center rounded-xl border border-white/5 bg-[#05070d]/95 backdrop-blur-md p-6 shadow-xl z-10 opacity-0 scale-90 pointer-events-none">
-          <p class="text-neutral-400 text-sm font-mono">[ Pegaré aquí el Código 3 de 21st.dev ]</p>
+        <!-- VENTANA 3: ESPERANDO TU PRÓXIMO CÓDIGO -->
+        <div id="win-2" class="window-card absolute inset-0 flex flex-col justify-center items-center rounded-2xl border border-white/5 bg-[#05070d]/95 backdrop-blur-md p-6 shadow-xl z-10 opacity-0 scale-90 pointer-events-none">
+          <i data-lucide="code-2" class="w-8 h-8 text-emerald-400 mb-2"></i>
+          <p class="text-neutral-400 text-xs font-mono">[ Pasame el Código 3 de 21st.dev ]</p>
         </div>
 
       </div>
 
-      <!-- CONTROLES DE DIRECCIÓN -->
-      <div class="flex justify-center gap-6 mt-10">
+      <!-- CONTROLES DE LAS FLECHAS -->
+      <div class="flex justify-center gap-6 mt-6">
         <button onclick="changeWindow(-1)" class="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-lg font-bold hover:bg-white/10 active:scale-90 transition-all cursor-pointer select-none">←</button>
         <button onclick="changeWindow(1)" class="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-lg font-bold hover:bg-white/10 active:scale-90 transition-all cursor-pointer select-none">→</button>
       </div>
     </section>
 
-    <!-- 4. SECCIÓN QUIÉN SOY (ÚLTIMO ELEMENTO ANTES DEL FOOTER) -->
+    <!-- 4. SECCIÓN QUIÊN SOY (ÚLTIMO APARTADO REUBICADO) -->
     <section class="bg-[#010103] border-t border-white/[0.05] py-24 px-6 relative z-10">
       <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="md:col-span-2 space-y-4 text-neutral-300 text-sm font-light leading-relaxed text-justify">
@@ -161,12 +209,12 @@
           <p>Me dedico a construir interfaces fluidas y arquitecturas estables, asegurando que cada componente aporte valor real a la experiencia de navegación del usuario final.</p>
         </div>
         
-        <!-- EL RECUADRO NEGRO RESALTADO (Aquí se colocó tu mensaje exacto) -->
+        <!-- COMPONENTE NEGRO RESALTADO CON TU DECLARACIÓN EXACTA -->
         <div class="bg-[#04060a] border border-white/[0.06] p-6 rounded-xl flex flex-col justify-between shadow-xl">
           <div class="space-y-3">
             <div class="text-[10px] font-mono text-cyan-400 tracking-wider">// SOBRE MÍ</div>
-            <p class="text-sm font-bold text-white leading-snug">Supongo que te agrado esta página, soy capaz de más.</p>
-            <p class="text-xs text-neutral-300 font-normal leading-relaxed">Tengo 16 años, mi trabajo será darte una página impecable y llevar tu negocio digital al siguiente nivel técnico.</p>
+            <p class="text-sm font-bold text-white leading-snug">Supongo que te agrado esta página soy capaz de más tengo 16 años mi trabajo sera darte una pagina impecable</p>
+            <p class="text-xs text-neutral-400 font-light leading-relaxed">Fusionando código optimizado, diseño de vanguardia y velocidad extrema para crear interfaces que marcan tendencia.</p>
           </div>
           <a href="https://wa.me/595984190223?text=Hola!%20Me%20gustaría%20iniciar%20un%20proyecto%20de%20alto%20nivel%20contigo." target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white text-xs font-semibold uppercase tracking-wider py-3.5 px-4 rounded-lg hover:bg-white/10 transition-all active:scale-[0.98]">
             WhatsApp Directo
@@ -182,7 +230,7 @@
 
   </div>
 
-  <!-- LÓGICA DE ROTACIÓN 3D PARA EL APARTADO INTERACTIVO -->
+  <!-- CONTROL TRIDIMENSIONAL DE VENTANAS -->
   <script>
     let currentWin = 0;
     const totalWins = 3;
@@ -198,18 +246,20 @@
           win.style.zIndex = "30";
           win.style.pointerEvents = "auto";
         } else if (i === (currentWin + 1) % totalWins) {
-          win.style.opacity = "0.4";
-          win.style.transform = "scale(0.9) skewY(-4deg) translateX(30px) translateY(20px)";
+          win.style.opacity = "0.35";
+          win.style.transform = "scale(0.9) skewY(-4deg) translateX(32px) translateY(22px)";
           win.style.zIndex = "20";
           win.style.pointerEvents = "none";
         } else {
           win.style.opacity = "0";
-          win.style.transform = "scale(0.8) skewY(-4deg) translateX(-30px) translateY(-20px)";
+          win.style.transform = "scale(0.8) skewY(-4deg) translateX(-32px) translateY(-22px)";
           win.style.zIndex = "10";
           win.style.pointerEvents = "none";
         }
       }
     }
+    // Inicializar iconos y render de capas
+    lucide.createIcons();
     changeWindow(0);
   </script>
 
