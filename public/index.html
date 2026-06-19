@@ -6,7 +6,7 @@
   <title>Victor Hugo | Portafolio Premium</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- Lucide Icons para soportar los iconos de las interfaces -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -104,7 +104,6 @@
           <a href="#servicios" class="hover:text-white transition-colors">Servicios</a>
           <a href="#interactivo" class="hover:text-white transition-colors">Ejemplos</a>
           <a href="#social" class="hover:text-white transition-colors">Comunidad</a>
-          <a href="#contacto" class="hover:text-white transition-colors">Contacto</a>
         </div>
       </nav>
     </header>
@@ -419,97 +418,43 @@
       </div>
     </section>
 
-    <!-- 6. NUEVA SECCIÓN: SOCIAL HUB (TIKTOK, INSTAGRAM, WHATSAPP) -->
-    <section id="social" class="px-6 py-20 max-w-5xl mx-auto relative z-10 border-t border-white/[0.03]">
-      <div class="text-center space-y-2 mb-16">
+    <!-- 6. SECCIÓN: SOCIAL HUB - COMPACTA Y HORIZONTAL (IGUAL QUE EN LAS IMÁGENES) -->
+    <section id="social" class="px-6 py-24 max-w-4xl mx-auto relative z-10 border-t border-white/[0.03] text-center">
+      <div class="space-y-2 mb-10">
         <h2 class="text-[11px] uppercase tracking-widest text-violet-400 font-bold">Comunidad & Contenido</h2>
-        <p class="text-2xl sm:text-4xl font-bold tracking-tight">Presencia Digital Interactiva</p>
+        <p class="text-2xl sm:text-3xl font-bold tracking-tight">Presencia Digital Interactiva</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Tarjeta TikTok -->
-        <a href="https://www.tiktok.com/@vhm.3d" target="_blank" rel="noopener noreferrer" class="social-card bg-[#030306]/80 border border-white/[0.05] rounded-2xl p-6 flex flex-col justify-between min-h-[200px] hover:border-pink-500/40 transition-all group">
-          <div class="space-y-4">
-            <div class="w-10 h-10 rounded-xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center group-hover:bg-pink-500/20 transition-all">
-              <i data-lucide="video" class="w-5 h-5 text-pink-400"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
-                TikTok <span class="text-xs font-normal text-neutral-500 group-hover:translate-x-1 transition-transform">→</span>
-              </h3>
-              <p class="text-neutral-400 text-xs font-light leading-relaxed mt-1">Animaciones en 3D, procesos creativos detallados de código y clips rápidos de diseño de interfaces de vanguardia.</p>
-            </div>
+      <!-- Contenedor alineado horizontalmente con estilo minimalista premium -->
+      <div class="flex flex-row flex-wrap items-center justify-center gap-8 sm:gap-12 mt-6">
+        <!-- Instagram Link -->
+        <a href="https://www.instagram.com/vhm.disenopremium" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2.5 text-neutral-400 hover:text-white transition-colors py-1 px-3">
+          <div class="w-5 h-5 rounded-md bg-indigo-500/10 flex items-center justify-center group-hover:bg-indigo-500/20 transition-all">
+            <i data-lucide="instagram" class="w-3.5 h-3.5 text-indigo-400"></i>
           </div>
-          <div class="text-[10px] font-mono uppercase text-pink-400 tracking-wider pt-4">@vhm.3d</div>
+          <span class="text-xs font-semibold tracking-wide">Instagram</span>
         </a>
 
-        <!-- Tarjeta Instagram -->
-        <a href="https://www.instagram.com/vhm.disenopremium" target="_blank" rel="noopener noreferrer" class="social-card bg-[#030306]/80 border border-white/[0.05] rounded-2xl p-6 flex flex-col justify-between min-h-[200px] hover:border-indigo-400/40 transition-all group">
-          <div class="space-y-4">
-            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center group-hover:bg-indigo-500/20 transition-all">
-              <i data-lucide="instagram" class="w-5 h-5 text-indigo-400"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
-                Instagram <span class="text-xs font-normal text-neutral-500 group-hover:translate-x-1 transition-transform">→</span>
-              </h3>
-              <p class="text-neutral-400 text-xs font-light leading-relaxed mt-1">Portafolio estético y visual. Identidades de marca exclusivas, logotipos premium y adelantos de estructuras UX fijas.</p>
-            </div>
+        <!-- TikTok Link -->
+        <a href="https://www.tiktok.com/@vhm.3d" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2.5 text-neutral-400 hover:text-white transition-colors py-1 px-3">
+          <div class="w-5 h-5 rounded-md bg-pink-500/10 flex items-center justify-center group-hover:bg-pink-500/20 transition-all">
+            <i data-lucide="video" class="w-3.5 h-3.5 text-pink-400"></i>
           </div>
-          <div class="text-[10px] font-mono uppercase text-indigo-400 tracking-wider pt-4">@vhm.disenopremium</div>
+          <span class="text-xs font-semibold tracking-wide">TikTok</span>
         </a>
 
-        <!-- Tarjeta WhatsApp -->
-        <a href="https://wa.me/595995648052?text=Hola!%20Vengo%20de%20tu%20portafolio.%20Me%20interesa%20armar%20un%20proyecto%20web%20exclusivo." target="_blank" rel="noopener noreferrer" class="social-card bg-[#030306]/80 border border-white/[0.05] rounded-2xl p-6 flex flex-col justify-between min-h-[200px] hover:border-emerald-400/40 transition-all group">
-          <div class="space-y-4">
-            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500/20 transition-all">
-              <i data-lucide="message-circle" class="w-5 h-5 text-emerald-400"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
-                WhatsApp <span class="text-xs font-normal text-neutral-500 group-hover:translate-x-1 transition-transform">→</span>
-              </h3>
-              <p class="text-neutral-400 text-xs font-light leading-relaxed mt-1">Contacto directo e inmediato para presupuestos, consultoría de marca, flujos e-commerce y desarrollo ágil.</p>
-            </div>
+        <!-- WhatsApp Link -->
+        <a href="https://wa.me/595995648052?text=Hola!%20Vengo%20de%20tu%20portafolio.%20Me%20interesa%20armar%20un%20proyecto%20web%20exclusivo." target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2.5 text-neutral-400 hover:text-white transition-colors py-1 px-3">
+          <div class="w-5 h-5 rounded-md bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500/20 transition-all">
+            <i data-lucide="message-circle" class="w-3.5 h-3.5 text-emerald-400"></i>
           </div>
-          <div class="text-[10px] font-mono uppercase text-emerald-400 tracking-wider pt-4">+595 995 648052</div>
+          <span class="text-xs font-semibold tracking-wide">WhatsApp</span>
         </a>
-      </div>
-    </section>
-
-    <!-- FORMULARIO DE CONTACTO PREMIUM COMPACTO -->
-    <section id="contacto" class="px-6 py-20 max-w-xl mx-auto relative z-10 border-t border-white/[0.03]">
-      <div class="bg-[#04060a] border border-white/[0.06] rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
-        <div class="space-y-1">
-          <h3 class="text-xl font-bold tracking-tight">Hablemos de tu marca</h3>
-          <p class="text-neutral-400 text-xs font-light">Escribime directamente para coordinar una videollamada de revisión gratuita.</p>
-        </div>
-        
-        <form class="space-y-4" action="#" method="POST">
-          <div class="glass-input rounded-xl p-3 flex flex-col">
-            <label class="text-[9px] text-neutral-400 font-semibold uppercase tracking-wider mb-0.5">Nombre Completo</label>
-            <input type="text" required placeholder="Tu nombre..." class="bg-transparent text-xs text-white outline-none w-full placeholder:text-neutral-600" />
-          </div>
-          
-          <div class="glass-input rounded-xl p-3 flex flex-col">
-            <label class="text-[9px] text-neutral-400 font-semibold uppercase tracking-wider mb-0.5">WhatsApp / Correo</label>
-            <input type="text" required placeholder="Cómo sugerís que te contacte..." class="bg-transparent text-xs text-white outline-none w-full placeholder:text-neutral-600" />
-          </div>
-
-          <div class="glass-input rounded-xl p-3 flex flex-col">
-            <label class="text-[9px] text-neutral-400 font-semibold uppercase tracking-wider mb-0.5">Idea general o Tienda</label>
-            <textarea rows="3" required placeholder="Contame un poco sobre tu idea de negocio o sitio actual..." class="bg-transparent text-xs text-white outline-none w-full resize-none placeholder:text-neutral-600"></textarea>
-          </div>
-
-          <button type="submit" class="w-full bg-white text-black font-bold text-xs uppercase tracking-wider py-4 rounded-xl transition-all active:scale-[0.98] cursor-pointer shadow-lg hover:bg-neutral-200">
-            Enviar Mensaje
-          </button>
-        </form>
       </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="py-8 text-center text-[10px] text-neutral-600 border-t border-white/[0.02] relative z-10 font-mono">
+    <footer class="py-12 text-center text-[10px] text-neutral-600 border-t border-white/[0.02] relative z-10 font-mono">
       &copy; 2026 Victor Hugo. Hecho con Estética Cyber-Streetwear.
     </footer>
 
@@ -591,7 +536,7 @@
       }
     }
 
-    // Efecto visual interactivo para las tarjetas con deformación skew de la sección 3
+    // Toggle interactivo para las tarjetas con deformación skew de la sección 3
     function toggleFeatureCard(cardType) {
       const cardTiendas = document.getElementById('card-tiendas');
       const cardInterfaces = document.getElementById('card-interfaces');
@@ -606,7 +551,7 @@
     }
 
     // Handler para seguir el movimiento del mouse en las tarjetas premium (efecto radial)
-    document.querySelectorAll('.service-card, .social-card').forEach(card => {
+    document.querySelectorAll('.service-card').forEach(card => {
       card.addEventListener('mousemove', e => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
