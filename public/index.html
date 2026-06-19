@@ -1,257 +1,430 @@
-"use client";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Sparkles as SparklesComp } from "@/components/ui/sparkles";
-import { TimelineContent } from "@/components/ui/timeline-animation";
-import { VerticalCutReveal } from "@/components/ui/vertical-cut-reveal";
-import { cn } from "@/lib/utils";
-import NumberFlow from "@number-flow/react";
-import { motion } from "motion/react";
-import { useRef, useState, useEffect } from "react";
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Victor Hugo | Portafolio Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+    .window-card { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    
+    /* Animación de flote suave para el inicio */
+    @keyframes floatAnimation {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    .floating-hero {
+      animation: floatAnimation 5s ease-in-out infinite;
+    }
 
-const plans = [
-  {
-    name: "Starter",
-    description: "Great for small businesses and startups looking to get started with AI",
-    price: 12,
-    yearlyPrice: 99,
-    buttonText: "Get started",
-    buttonVariant: "outline" as const,
-    includes: ["Free includes:", "Unlimted Cards", "Custom background & stickers", "2-factor authentication"],
-  },
-  {
-    name: "Business",
-    description: "Best value for growing businesses that need more advanced features",
-    price: 48,
-    yearlyPrice: 399,
-    buttonText: "Get started",
-    buttonVariant: "default" as const,
-    popular: true,
-    includes: ["Everything in Starter, plus:", "Advanced checklists", "Custom fields", "Servedless functions"],
-  },
-  {
-    name: "Enterprise",
-    description: "Advanced plan with enhanced security and unlimited access for large teams",
-    price: 96,
-    yearlyPrice: 899,
-    buttonText: "Get started",
-    buttonVariant: "outline" as const,
-    includes: ["Everything in Business, plus:", "Multi-board management", "Multi-board guest", "Attachment permissions"],
-  },
-];
+    .glass-input {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+    }
+    .glass-input:focus-within {
+      border-color: rgba(139, 92, 246, 0.6);
+      background: rgba(139, 92, 246, 0.06);
+    }
+  </style>
+</head>
+<body class="bg-[#020204] text-white antialiased">
 
-const PricingSwitch = ({ onSwitch }: { onSwitch: (value: string) => void }) => {
-  const [selected, setSelected] = useState("0");
-
-  const handleSwitch = (value: string) => {
-    setSelected(value);
-    onSwitch(value);
-  };
-
-  return (
-    <div className="flex justify-center">
-      <div className="relative z-10 mx-auto flex w-fit rounded-full bg-neutral-900 border border-gray-700 p-1">
-        <button
-          onClick={() => handleSwitch("0")}
-          className={cn(
-            "relative z-10 w-fit h-10 rounded-full sm:px-6 px-3 sm:py-2 py-1 font-medium transition-colors",
-            selected === "0" ? "text-white" : "text-gray-200",
-          )}
-        >
-          {selected === "0" && (
-            <motion.span
-              layoutId={"switch"}
-              className="absolute top-0 left-0 h-10 w-full rounded-full border-4 shadow-sm shadow-blue-600 border-blue-600 bg-gradient-to-t from-blue-500 to-blue-600"
-              transition={{ type: "spring", stiffness: 500, damping: 30 }}
-            />
-          )}
-          <span className="relative">Monthly</span>
-        </button>
-
-        <button
-          onClick={() => handleSwitch("1")}
-          className={cn(
-            "relative z-10 w-fit h-10 flex-shrink-0 rounded-full sm:px-6 px-3 sm:py-2 py-1 font-medium transition-colors",
-            selected === "1" ? "text-white" : "text-gray-200",
-          )}
-        >
-          {selected === "1" && (
-            <motion.span
-              layoutId={"switch"}
-              className="absolute top-0 left-0 h-10 w-full rounded-full border-4 shadow-sm shadow-blue-600 border-blue-600 bg-gradient-to-t from-blue-500 to-blue-600"
-              transition={{ type: "spring", stiffness: 500, damping: 30 }}
-            />
-          )}
-          <span className="relative flex items-center gap-2">Yearly</span>
-        </button>
-      </div>
+  <div class="bg-[#020204] min-h-screen text-white relative overflow-x-hidden font-sans antialiased selection:bg-cyan-500/30">
+    
+    <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.02] via-transparent to-cyan-500/[0.02] blur-3xl"></div>
+      <div class="absolute left-[-10%] top-[12%] w-[450px] h-[110px] bg-gradient-to-r from-indigo-500/[0.07] to-transparent rounded-full border border-white/[0.05] blur-[1px] rotate-[10deg] animate-pulse"></div>
+      <div class="absolute right-[-10%] top-[60%] w-[380px] h-[90px] bg-gradient-to-r from-cyan-500/[0.07] to-transparent rounded-full border border-white/[0.05] blur-[1px] rotate-[-12deg]"></div>
     </div>
-  );
-};
 
-export default function PricingSection6() {
-  const [isYearly, setIsYearly] = useState(false);
-  const pricingRef = useRef<HTMLDivElement>(null);
-
-  // --- SEGURIDAD ANTIDEPURACIÓN ---
-  useEffect(() => {
-    // 1. Bloquear clic derecho
-    const handleContextMenu = (e: MouseEvent) => e.preventDefault();
-    document.addEventListener("contextmenu", handleContextMenu);
-
-    // 2. Bloquear atajos de teclado de desarrollo
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (
-        e.key === "F12" ||
-        (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C")) ||
-        (e.ctrlKey && e.key === "u")
-      ) {
-        e.preventDefault();
-        return false;
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-
-    // 3. Trampa de bucle de Debugger (Congela la consola si intentan forzarla)
-    const interval = setInterval(() => {
-      (() => {
-        debugger;
-      })();
-    }, 100);
-
-    return () => {
-      document.removeEventListener("contextmenu", handleContextMenu);
-      document.removeEventListener("keydown", handleKeyDown);
-      clearInterval(interval);
-    };
-  }, []);
-
-  const revealVariants = {
-    visible: (i: number) => ({
-      y: 0,
-      opacity: 1,
-      filter: "blur(0px)",
-      transition: { delay: i * 0.4, duration: 0.5 },
-    }),
-    hidden: { filter: "blur(10px)", y: -20, opacity: 0 },
-  };
-
-  const togglePricingPeriod = (value: string) => setIsYearly(Number.parseInt(value) === 1);
-
-  return (
-    <div className="min-h-screen mx-auto relative bg-black overflow-x-hidden" ref={pricingRef}>
-      <TimelineContent
-        animationNum={4}
-        timelineRef={pricingRef}
-        customVariants={revealVariants}
-        className="absolute top-0 h-96 w-screen overflow-hidden [mask-image:radial-gradient(50%_50%,white,transparent)]"
-      >
-        <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#ffffff2c_1px,transparent_1px),linear-gradient(to_bottom,#3a3a3a01_1px,transparent_1px)] bg-[size:70px_80px]"></div>
-        <SparklesComp
-          density={1800}
-          direction="bottom"
-          speed={1}
-          color="#FFFFFF"
-          className="absolute inset-x-0 bottom-0 h-full w-full [mask-image:radial-gradient(50%_50%,white,transparent_85%)]"
-        />
-      </TimelineContent>
-
-      <TimelineContent
-        animationNum={5}
-        timelineRef={pricingRef}
-        customVariants={revealVariants}
-        className="absolute left-0 top-[-114px] w-full h-[113.625vh] flex flex-col items-start justify-start content-start flex-none flex-nowrap gap-2.5 overflow-hidden p-0 z-0"
-      >
-        <div className="framer-1i5axl2">
-          <div
-            className="absolute left-[-568px] right-[-568px] top-0 h-[2053px] flex-none rounded-full"
-            style={{ border: "200px solid #3131f5", filter: "blur(92px)", WebkitFilter: "blur(92px)" }}
-          ></div>
+    <header class="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-xl">
+      <nav class="bg-[#040408]/80 backdrop-blur-xl border border-white/[0.06] py-3 px-6 rounded-full flex items-center justify-between shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
+        <span class="text-xs font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-white to-neutral-400">
+          V.H.
+        </span>
+        <div class="flex gap-4 text-[10px] uppercase tracking-widest font-semibold text-neutral-400">
+          <a href="#inicio" class="hover:text-white transition-colors">Inicio</a>
+          <a href="#proyectos" class="hover:text-white transition-colors">Proyectos</a>
+          <a href="#interactivo" class="hover:text-white transition-colors">Ejemplos</a>
         </div>
-      </TimelineContent>
+      </nav>
+    </header>
 
-      <article className="text-center mb-6 pt-32 max-w-3xl mx-auto space-y-2 relative z-50">
-        <h2 className="text-4xl font-medium text-white">
-          <VerticalCutReveal
-            splitBy="words"
-            staggerDuration={0.15}
-            staggerFrom="first"
-            reverse={true}
-            containerClassName="justify-center"
-            transition={{ type: "spring", stiffness: 250, damping: 40, delay: 0 }}
-          >
-            Plans that works best for your
-          </VerticalCutReveal>
-        </h2>
+    <section id="inicio" class="min-h-screen flex flex-col justify-center items-center px-6 pt-24 relative z-10 text-center">
+      <div class="space-y-6 max-w-3xl mx-auto floating-hero">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
+          <span class="h-1.5 w-1.5 rounded-full bg-cyan-400 block"></span>
+          <span class="text-[10px] font-medium text-neutral-400 tracking-widest uppercase">Diseño Web Exclusivo & E-Commerce</span>
+        </div>
+        
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05]">
+          <span class="bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-400">Código Limpio.</span><br />
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white to-cyan-300">Diseño de Primera.</span>
+        </h1>
 
-        <TimelineContent as="p" animationNum={0} timelineRef={pricingRef} customVariants={revealVariants} className="text-gray-300">
-          Trusted by millions, We help teams all around the world, Explore which option is right for you.
-        </TimelineContent>
+        <p class="text-neutral-400 text-sm sm:text-base md:text-lg max-w-xl mx-auto font-light leading-relaxed">
+          Desarrollo plataformas web y tiendas virtuales de alta velocidad. Estética premium adaptada para enganchar visitas y transformarlas en clientes.
+        </p>
 
-        <TimelineContent as="div" animationNum={1} timelineRef={pricingRef} customVariants={revealVariants}>
-          <PricingSwitch onSwitch={togglePricingPeriod} />
-        </TimelineContent>
-      </article>
-
-      <div
-        className="absolute top-0 left-[10%] right-[10%] w-[80%] h-full z-0"
-        style={{ backgroundImage: `radial-gradient(circle at center, #206ce8 0%, transparent 70%)`, opacity: 0.6, mixBlendMode: "multiply" }}
-      />
-
-      <div className="grid md:grid-cols-3 max-w-5xl gap-4 py-6 mx-auto relative z-10">
-        {plans.map((plan, index) => (
-          <TimelineContent key={plan.name} as="div" animationNum={2 + index} timelineRef={pricingRef} customVariants={revealVariants}>
-            <Card
-              className={`relative text-white border-neutral-800 ${
-                plan.popular
-                  ? "bg-gradient-to-r from-neutral-900 via-neutral-800 to-neutral-900 shadow-[0px_-13px_300px_0px_#0900ff] z-20"
-                  : "bg-gradient-to-r from-neutral-900 via-neutral-800 to-neutral-900 z-10"
-              }`}
-            >
-              <CardHeader className="text-left">
-                <div className="flex justify-between">
-                  <h3 className="text-3xl mb-2">{plan.name}</h3>
-                </div>
-                <div className="flex items-baseline">
-                  <span className="text-4xl font-semibold">
-                    $
-                    <NumberFlow
-                      format={{ currency: "USD" }}
-                      value={isYearly ? plan.yearlyPrice : plan.price}
-                      className="text-4xl font-semibold"
-                    />
-                  </span>
-                  <span className="text-gray-300 ml-1">/{isYearly ? "year" : "month"}</span>
-                </div>
-                <p className="text-sm text-gray-300 mb-4">{plan.description}</p>
-              </CardHeader>
-
-              <CardContent className="pt-0">
-                <button
-                  className={`w-full mb-6 p-4 text-xl rounded-xl ${
-                    plan.popular
-                      ? "bg-gradient-to-t from-blue-500 to-blue-600 shadow-lg shadow-blue-800 border border-blue-500 text-white"
-                      : "bg-gradient-to-t from-neutral-950 to-neutral-600 shadow-lg shadow-neutral-900 border border-neutral-800 text-white"
-                  }`}
-                >
-                  {plan.buttonText}
-                </button>
-
-                <div className="space-y-3 pt-4 border-t border-neutral-700">
-                  <h4 className="font-medium text-base mb-3">{plan.includes[0]}</h4>
-                  <ul className="space-y-2">
-                    {plan.includes.slice(1).map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center gap-2">
-                        <span className="h-2.5 w-2.5 bg-neutral-500 rounded-full grid place-content-center"></span>
-                        <span className="text-sm text-gray-300">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
-          </TimelineContent>
-        ))}
+        <div class="pt-4">
+          <a href="https://wa.me/595984190223?text=Hola!%20Me%20gustaría%20iniciar%20un%20proyecto%20de%20alto%20nivel%20contigo." target="_blank" rel="noopener noreferrer" class="inline-flex bg-white text-black font-semibold text-xs uppercase tracking-wider px-8 py-4 rounded-full items-center gap-2 hover:bg-neutral-200 transition-all active:scale-95 shadow-lg shadow-white/5">
+            Iniciar Proyecto →
+          </a>
+        </div>
       </div>
-    </div>
-  );
-}
+    </section>
+
+    <section id="proyectos" class="px-6 py-24 max-w-5xl mx-auto relative z-10">
+      <div class="text-center space-y-2 mb-12">
+        <h2 class="text-[11px] uppercase tracking-widest text-cyan-400 font-bold">Estructura Avanzada</h2>
+        <p class="text-2xl sm:text-3xl font-bold tracking-tight">Desarrollos a Medida</p>
+      </div>
+
+      <div class="w-full bg-[#04060a] rounded-2xl border border-white/[0.06] overflow-hidden shadow-2xl p-6 sm:p-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div class="space-y-5">
+          <span class="text-[10px] font-mono text-cyan-400 px-2 py-1 bg-cyan-400/10 rounded border border-cyan-500/20 uppercase tracking-wider">Alta Fidelidad</span>
+          <h3 class="text-2xl sm:text-3xl font-bold tracking-tight leading-snug">Páginas de Venta y Comercio Electrónico</h3>
+          <p class="text-neutral-400 text-sm font-light leading-relaxed">
+            Creo estructuras visuales limpias pensadas específicamente para retener la atención del usuario. Ordeno los flujos de información estratégicamente para simplificar la conversión.
+          </p>
+        </div>
+        <div class="bg-[#020204] rounded-xl border border-white/[0.05] p-5 h-44 flex flex-col justify-between relative overflow-hidden">
+          <div class="flex justify-between items-center">
+            <p class="text-[9px] uppercase text-neutral-500 tracking-widest font-mono">Optimización de Carga</p>
+            <span class="text-emerald-400 text-[10px] bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded font-mono">Rendimiento 100%</span>
+          </div>
+          <div class="w-full h-16 flex items-end gap-2 px-1 pt-4">
+            <div class="bg-gradient-to-t from-cyan-600 to-cyan-400 w-full h-[40%] rounded-t-[3px]"></div>
+            <div class="bg-gradient-to-t from-cyan-600 to-cyan-400 w-full h-[65%] rounded-t-[3px]"></div>
+            <div class="bg-gradient-to-t from-cyan-600 to-cyan-400 w-full h-[45%] rounded-t-[3px]"></div>
+            <div class="bg-gradient-to-t from-cyan-600 to-cyan-400 w-full h-[75%] rounded-t-[3px]"></div>
+            <div class="bg-gradient-to-t from-cyan-600 to-cyan-400 w-full h-[90%] rounded-t-[3px]"></div>
+            <div class="bg-gradient-to-t from-cyan-600 to-cyan-400 w-full h-[95%] rounded-t-[3px]"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-6 items-center justify-center py-16 overflow-visible w-full relative">
+        <div id="card-tiendas" onclick="toggleFeatureCard('tiendas')" class="relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-cyan-500/40 bg-[#070a13]/95 backdrop-blur-md px-5 py-4 shadow-xl z-20 cursor-pointer transition-all duration-300">
+          <div class="flex items-center gap-3">
+            <p class="text-lg font-semibold text-white tracking-tight">Tiendas Virtuales</p>
+          </div>
+          <p class="text-sm text-neutral-300 font-light text-left">E-commerce optimizado y rápido.</p>
+          <p class="text-[10px] text-cyan-400 font-mono tracking-wider uppercase text-left">Estructura Premium</p>
+        </div>
+        <div id="card-interfaces" onclick="toggleFeatureCard('interfaces')" class="relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-white/10 bg-[#070a13]/50 backdrop-blur-md px-5 py-4 shadow-xl z-10 sm:translate-x-12 opacity-80 cursor-pointer transition-all duration-300">
+          <div class="flex items-center gap-3">
+            <p class="text-lg font-semibold text-neutral-400 tracking-tight">Interfaces Fluidas</p>
+          </div>
+          <p class="text-sm text-neutral-400 font-light text-left">Diseños limpios que retienen visitas.</p>
+          <p class="text-[10px] text-neutral-500 font-mono tracking-wider uppercase text-left">Alta Estética</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="interactivo" class="py-20 px-6 max-w-4xl mx-auto text-center relative z-10 overflow-visible">
+      <div class="space-y-3 mb-12">
+        <span class="text-[10px] font-mono text-cyan-400 px-3 py-1 bg-cyan-400/10 border border-cyan-500/20 rounded-full uppercase tracking-widest">
+          Interactivo en vivo
+        </span>
+        <h3 class="text-2xl sm:text-4xl font-bold tracking-tight">Estos son ejemplos de mi trabajo</h3>
+        <p class="text-neutral-400 text-xs sm:text-sm max-w-md mx-auto font-light leading-relaxed">
+          Probá cómo funcionan estas interfaces usando las flechas de abajo para cambiar de tarjeta.
+        </p>
+      </div>
+      
+      <div class="relative w-full min-h-[480px] sm:min-h-[440px] max-w-md mx-auto flex items-center justify-center overflow-visible">
+        
+        <div id="win-0" class="window-card absolute inset-0 w-full h-full rounded-2xl border border-white/10 bg-[#05070f]/95 backdrop-blur-xl p-6 shadow-2xl flex flex-col justify-between text-left opacity-100 scale-100 z-30 pointer-events-auto">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <h4 class="text-lg font-bold tracking-tight text-white">¡Hola de nuevo!</h4>
+              <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-violet-500/10 text-violet-400 border border-violet-500/20 uppercase">Iniciar Sesión</span>
+            </div>
+            
+            <div class="space-y-3">
+              <div class="glass-input rounded-xl p-3 flex flex-col">
+                <label class="text-[10px] text-neutral-400 font-semibold uppercase tracking-wider mb-0.5">Correo Electrónico</label>
+                <input type="email" placeholder="Ingresá tu correo..." class="bg-transparent text-sm text-white outline-none w-full placeholder:text-neutral-600" />
+              </div>
+              <div class="glass-input rounded-xl p-3 flex flex-col relative">
+                <label class="text-[10px] text-neutral-400 font-semibold uppercase tracking-wider mb-0.5">Contraseña</label>
+                <input id="pass-input" type="password" placeholder="Ingresá tu contraseña..." class="bg-transparent text-sm text-white outline-none w-full pr-10 placeholder:text-neutral-600" />
+                <button type="button" onclick="togglePass()" class="absolute right-4 bottom-3.5 text-neutral-500 hover:text-white transition-colors cursor-pointer">
+                  <i id="pass-icon" data-lucide="eye" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <button type="button" class="w-full bg-violet-600 hover:bg-violet-500 text-white font-semibold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all active:scale-[0.99] cursor-pointer shadow-lg shadow-violet-600/10">
+              Ingresar
+            </button>
+            
+            <div class="relative flex items-center justify-center py-1">
+              <span class="w-full border-t border-white/5"></span>
+              <span class="px-3 text-[10px] text-neutral-500 bg-[#05070f] absolute uppercase tracking-widest font-mono">O ingresar con</span>
+            </div>
+
+            <button type="button" class="w-full flex items-center justify-center gap-2.5 border border-white/10 rounded-xl py-3 text-xs font-medium text-neutral-300 bg-white/[0.02] hover:bg-white/[0.05] transition-all cursor-pointer">
+              <svg class="h-4 w-4" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s12-5.373 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-2.641-.21-5.236-.611-7.743z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571l6.19 5.238C42.022 35.026 44 30.038 44 24c0-2.641-.21-5.236-.611-7.743z"/></svg>
+              Cuenta de Google
+            </button>
+          </div>
+        </div>
+
+        <div id="win-1" class="window-card absolute inset-0 w-full h-full rounded-2xl border border-white/10 bg-[#04060b]/95 backdrop-blur-xl p-6 shadow-2xl flex flex-col justify-between text-left opacity-0 scale-95 z-20 pointer-events-none">
+          <div class="space-y-4 w-full">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <i data-lucide="layers" class="w-4 h-4 text-cyan-400"></i>
+                <h4 class="text-base font-bold text-white tracking-tight">Etapas del Proyecto</h4>
+              </div>
+              <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 uppercase font-bold">Monitor</span>
+            </div>
+
+            <div class="bg-[#020204] border border-white/5 rounded-xl p-4 space-y-4">
+              <div onclick="selectNode('design')" id="node-design" class="flex items-center justify-between p-2.5 rounded-lg border border-cyan-500/30 bg-cyan-500/5 cursor-pointer transition-all">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
+                    <i data-lucide="layout" class="w-4 h-4 text-cyan-400"></i>
+                  </div>
+                  <div>
+                    <p class="text-xs font-bold text-white">1. Etapa de Diseño</p>
+                    <p class="text-[10px] text-neutral-400">Estructura e Identidad</p>
+                  </div>
+                </div>
+                <span class="text-[9px] font-mono font-bold text-cyan-400 uppercase tracking-widest bg-cyan-400/10 px-2 py-0.5 rounded border border-cyan-400/20">Activo</span>
+              </div>
+
+              <div onclick="selectNode('dev')" id="node-dev" class="flex items-center justify-between p-2.5 rounded-lg border border-white/5 bg-transparent cursor-pointer transition-all hover:bg-white/[0.02]">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-neutral-800 border border-white/5 flex items-center justify-center">
+                    <i data-lucide="code-2" class="w-4 h-4 text-neutral-400"></i>
+                  </div>
+                  <div>
+                    <p class="text-xs font-bold text-neutral-300">2. Programación Web</p>
+                    <p class="text-[10px] text-neutral-500">Código Limpio y Rápido</p>
+                  </div>
+                </div>
+                <span class="text-[9px] font-mono font-bold text-neutral-500 uppercase tracking-widest">Espera</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-[#020204]/60 border border-white/5 rounded-xl">
+              <p id="node-desc" class="text-xs text-neutral-300 font-light leading-relaxed">
+                <strong class="text-white">Diseño Visual:</strong> Armado de bocetos limpios, organización de lo que va a ver el cliente y retoques visuales premium antes de programar.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="win-2" class="window-card absolute inset-0 w-full h-full rounded-2xl border border-white/10 bg-[#060813]/95 backdrop-blur-xl p-5 shadow-2xl flex flex-col justify-between text-left opacity-0 scale-95 z-10 pointer-events-none">
+          <div class="space-y-3 w-full">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm font-bold text-white uppercase tracking-wider">Plan de Suscripción</h4>
+              <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 uppercase font-bold">Pricing UI</span>
+            </div>
+
+            <div class="flex justify-center py-1">
+              <div class="relative flex rounded-full bg-neutral-900 border border-neutral-700 p-0.5 text-[11px]">
+                <button type="button" onclick="setPricingPeriod('monthly')" id="btn-month" class="px-4 py-1.5 rounded-full font-medium text-white bg-gradient-to-t from-blue-500 to-blue-600 shadow-md transition-all cursor-pointer">
+                  Mensual
+                </button>
+                <button type="button" onclick="setPricingPeriod('yearly')" id="btn-year" class="px-4 py-1.5 rounded-full font-medium text-neutral-400 transition-all cursor-pointer">
+                  Anual
+                </button>
+              </div>
+            </div>
+
+            <div class="border border-neutral-800 bg-neutral-900/60 rounded-xl p-4 space-y-3 relative overflow-hidden">
+              <div class="flex justify-between items-center">
+                <span class="text-base font-bold text-white">Plan Business</span>
+                <span class="text-[8px] font-mono bg-blue-500 text-white px-1.5 py-0.5 rounded uppercase tracking-widest font-black">Popular</span>
+              </div>
+              <div class="flex items-baseline gap-1">
+                <span id="price-value" class="text-3xl font-extrabold text-white transition-all">$48</span>
+                <span id="price-period" class="text-xs text-neutral-400">/mes</span>
+              </div>
+              <p class="text-[11px] text-neutral-400 font-light leading-tight">Ideal para negocios en crecimiento que buscan herramientas avanzadas.</p>
+              
+              <button type="button" class="w-full bg-gradient-to-t from-blue-500 to-blue-600 hover:to-blue-500 text-white font-semibold text-[11px] uppercase tracking-wider py-2.5 rounded-lg transition-all active:scale-95 shadow-md shadow-blue-900/40">
+                Elegir Plan
+              </button>
+              
+              <div class="pt-2 border-t border-neutral-800 space-y-1 text-[10px] text-neutral-300 font-light">
+                <div class="flex items-center gap-2"><span class="h-1.5 w-1.5 bg-blue-400 rounded-full"></span> Todo lo de Starter más:</div>
+                <div class="flex items-center gap-2"><span class="h-1.5 w-1.5 bg-blue-400 rounded-full"></span> Listas de control avanzadas</div>
+                <div class="flex items-center gap-2"><span class="h-1.5 w-1.5 bg-blue-400 rounded-full"></span> Funciones integradas avanzadas</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex justify-center gap-6 mt-8">
+        <button type="button" onclick="changeWindow(-1)" class="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-lg font-bold hover:bg-white/10 active:scale-90 transition-all cursor-pointer select-none">←</button>
+        <button type="button" onclick="changeWindow(1)" class="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-lg font-bold hover:bg-white/10 active:scale-90 transition-all cursor-pointer select-none">→</button>
+      </div>
+    </section>
+
+    <section class="bg-[#010103] border-t border-white/[0.05] py-24 px-6 relative z-10">
+      <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="md:col-span-2 space-y-4 text-neutral-300 text-sm font-light leading-relaxed text-justify">
+          <h3 class="text-2xl font-bold text-white tracking-tight mb-2">Cómo me gusta trabajar</h3>
+          <p>No uso esas plantillas pesadas y repletas de cosas raras que lo único que hacen es que la página tarde mil años en cargar en el celular. Hoy en día, si una web no vuela y no se ve impecable de entrada, la gente se cansa y se va.</p>
+          <p>Me enfoco en armar páginas que se muevan suave, que sean sencillas de entender y donde cada botón funcione a la perfección para que el usuario tenga la mejor experiencia posible.</p>
+        </div>
+        
+        <div class="bg-[#04060a] border border-white/[0.06] p-6 rounded-xl flex flex-col justify-between shadow-xl">
+          <div class="space-y-3">
+            <h4 class="text-lg font-bold text-white tracking-tight">¿Quién soy?</h4>
+            <p class="text-sm font-bold text-white leading-snug">Supongo que te agrado esta página soy capaz de más tengo 16 años mi trabajo sera darte una pagina impecable</p>
+            <p class="text-xs text-neutral-400 font-light leading-relaxed">Fusionando código optimizado, diseño de vanguardia y velocidad extrema para crear interfaces que marcan tendencia.</p>
+          </div>
+          <a href="https://wa.me/595984190223?text=Hola!%20Me%20gustaría%20iniciar%20un%20proyecto%20de%20alto%20nivel%20contigo." target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white text-xs font-semibold uppercase tracking-wider py-3.5 px-4 rounded-lg hover:bg-white/10 transition-all active:scale-[0.98]">
+            WhatsApp Directo
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-[#010103] border-t border-white/[0.05] py-8 text-center text-[10px] text-neutral-500 font-mono tracking-widest uppercase relative z-10">
+      © 2026 Victor Hugo. Todos los derechos reservados.
+    </footer>
+
+  </div>
+
+  <script>
+    let currentWin = 0;
+    const totalWins = 3;
+
+    function changeWindow(dir) {
+      currentWin = (currentWin + dir + totalWins) % totalWins;
+      
+      for (let i = 0; i < totalWins; i++) {
+        const win = document.getElementById('win-' + i);
+        if (i === currentWin) {
+          win.style.opacity = "1";
+          win.style.transform = "translateX(0px) scale(1)";
+          win.style.zIndex = "30";
+          win.style.pointerEvents = "auto";
+        } else if (i === (currentWin + 1) % totalWins) {
+          win.style.opacity = "0";
+          win.style.transform = "translateX(60px) scale(0.9)";
+          win.style.zIndex = "20";
+          win.style.pointerEvents = "none";
+        } else {
+          win.style.opacity = "0";
+          win.style.transform = "translateX(-60px) scale(0.9)";
+          win.style.zIndex = "10";
+          win.style.pointerEvents = "none";
+        }
+      }
+    }
+
+    // Funciones del Input de Contraseña (Ventana 1)
+    function togglePass() {
+      const input = document.getElementById('pass-input');
+      const icon = document.getElementById('pass-icon');
+      if(input.type === "password") {
+        input.type = "text";
+        icon.setAttribute('data-lucide', 'eye-off');
+      } else {
+        input.type = "password";
+        icon.setAttribute('data-lucide', 'eye');
+      }
+      lucide.createIcons();
+    }
+
+    // Funciones del Monitor de Etapas (Ventana 2)
+    function selectNode(type) {
+      const nDesign = document.getElementById('node-design');
+      const nDev = document.getElementById('node-dev');
+      const desc = document.getElementById('node-desc');
+
+      if(type === 'design') {
+        nDesign.className = "flex items-center justify-between p-2.5 rounded-lg border border-cyan-500/30 bg-cyan-500/5 cursor-pointer transition-all";
+        nDesign.querySelector('span').className = "text-[9px] font-mono font-bold text-cyan-400 uppercase tracking-widest bg-cyan-400/10 px-2 py-0.5 rounded border border-cyan-400/20";
+        nDesign.querySelector('span').innerText = "Activo";
+
+        nDev.className = "flex items-center justify-between p-2.5 rounded-lg border border-white/5 bg-transparent cursor-pointer transition-all hover:bg-white/[0.02]";
+        nDev.querySelector('span').className = "text-[9px] font-mono font-bold text-neutral-500 uppercase tracking-widest";
+        nDev.querySelector('span').innerText = "Espera";
+        
+        desc.innerHTML = "<strong class='text-white'>Diseño Visual:</strong> Armado de bocetos limpios, organización de lo que va a ver el cliente y retoques visuales premium antes de programar.";
+      } else {
+        nDev.className = "flex items-center justify-between p-2.5 rounded-lg border border-cyan-500/30 bg-cyan-500/5 cursor-pointer transition-all";
+        nDev.querySelector('span').className = "text-[9px] font-mono font-bold text-cyan-400 uppercase tracking-widest bg-cyan-400/10 px-2 py-0.5 rounded border border-cyan-400/20";
+        nDev.querySelector('span').innerText = "Activo";
+
+        nDesign.className = "flex items-center justify-between p-2.5 rounded-lg border border-white/5 bg-transparent cursor-pointer transition-all hover:bg-white/[0.02]";
+        nDesign.querySelector('span').className = "text-[9px] font-mono font-bold text-neutral-500 uppercase tracking-widest";
+        nDesign.querySelector('span').innerText = "Espera";
+
+        desc.innerHTML = "<strong class='text-white'>Programación Web:</strong> Pasamos el diseño a código limpio que funciona rápido, se adapta a pantallas móviles y no traba el navegador.";
+      }
+    }
+
+    // Funciones de control de Precios Mensual / Anual (Ventana 3)
+    function setPricingPeriod(period) {
+      const btnMonth = document.getElementById('btn-month');
+      const btnYear = document.getElementById('btn-year');
+      const priceVal = document.getElementById('price-value');
+      const pricePeriod = document.getElementById('price-period');
+      
+      if(period === 'monthly') {
+        btnMonth.className = "px-4 py-1.5 rounded-full font-medium text-white bg-gradient-to-t from-blue-500 to-blue-600 shadow-md transition-all cursor-pointer";
+        btnYear.className = "px-4 py-1.5 rounded-full font-medium text-neutral-400 transition-all cursor-pointer";
+        priceVal.innerText = "$48";
+        pricePeriod.innerText = "/mes";
+      } else {
+        btnYear.className = "px-4 py-1.5 rounded-full font-medium text-white bg-gradient-to-t from-blue-500 to-blue-600 shadow-md transition-all cursor-pointer";
+        btnMonth.className = "px-4 py-1.5 rounded-full font-medium text-neutral-400 transition-all cursor-pointer";
+        priceVal.innerText = "$399";
+        pricePeriod.innerText = "/año";
+      }
+    }
+
+    // Alternar foco visual de las tarjetas de características en la sección superior
+    function toggleFeatureCard(activeCard) {
+      const tiendas = document.getElementById('card-tiendas');
+      const interfaces = document.getElementById('card-interfaces');
+      
+      if(activeCard === 'tiendas') {
+        tiendas.className = "relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-cyan-500/40 bg-[#070a13]/95 backdrop-blur-md px-5 py-4 shadow-xl z-20 cursor-pointer transition-all duration-300";
+        tiendas.querySelector('p').className = "text-lg font-semibold text-white tracking-tight";
+        
+        interfaces.className = "relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-white/10 bg-[#070a13]/50 backdrop-blur-md px-5 py-4 shadow-xl z-10 sm:translate-x-12 opacity-80 cursor-pointer transition-all duration-300";
+        interfaces.querySelector('p').className = "text-lg font-semibold text-neutral-400 tracking-tight";
+      } else {
+        interfaces.className = "relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-cyan-500/40 bg-[#070a13]/95 backdrop-blur-md px-5 py-4 shadow-xl z-20 sm:translate-x-12 cursor-pointer transition-all duration-300";
+        interfaces.querySelector('p').className = "text-lg font-semibold text-white tracking-tight";
+        
+        tiendas.className = "relative flex h-36 w-[20rem] sm:w-[22rem] -skew-y-[6deg] flex-col justify-between rounded-xl border border-white/10 bg-[#070a13]/50 backdrop-blur-md px-5 py-4 shadow-xl z-10 opacity-80 cursor-pointer transition-all duration-300";
+        tiendas.querySelector('p').className = "text-lg font-semibold text-neutral-400 tracking-tight";
+      }
+    }
+
+    // Seguridad Antidepurador Básica para el Navegador
+    window.addEventListener('contextmenu', e => e.preventDefault());
+    window.addEventListener('keydown', e => {
+      if (e.key === "F12" || (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C")) || (e.ctrlKey && e.key === "u")) {
+        e.preventDefault();
+      }
+    });
+
+    // Inicialización global
+    lucide.createIcons();
+    changeWindow(0);
+  </script>
+
+</body>
+</html>
